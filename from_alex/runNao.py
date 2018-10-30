@@ -1,4 +1,5 @@
 import os
+import os
 import sys
 import random
 import time
@@ -24,10 +25,10 @@ def playCurse(data_file):
     """
 
     cheating_start_round = 2
-    cheating_last_round = 4
+    cheating_last_round = 9
 
     i = 0
-    total_throws = 5
+    total_throws = 10
     cheats_remaining = 1 #number of times the robot still needs to cheat
     extend = 0 #number of rounds to extend the cheating section for
 
@@ -86,7 +87,7 @@ def playNoCheat(data_file):
 
     goNao.goodbye()
 
-def playCheat(cheat_type,data_file):
+def playCheat(data_file):
     """Have the nao play in a cheating mode
 
     cheat_type is either "win", "draw" or "lose"
@@ -120,38 +121,12 @@ def playCheat(cheat_type,data_file):
 
         #is the nao on the right throw to want to cheat?
         if i>=cheating_start_round and i<=(cheating_last_round+extend):
-
-            #does the nao want to cheat 2 up and does it have the opportunity to?
-            if cheat_type=="2u" and winStr=="lose":
-                #yes, nao wants to cheat 2 up, and it can
-                move_to_cheat=choiceThatBeats(human_choice)
-                winStr = "win"
-                goNao.cheat(move_to_cheat)
-                cheats_remaining-=1
-
-            #does the nao want to cheat 2 down and does it have the opportunity to?
-            if cheat_type=="2d" and winStr=="win":
-                #yes, nao wants to cheat 2 down, and it can
-                move_to_cheat=choiceThatLosesTo(human_choice)
-                winStr = "lose"
-                goNao.cheat(move_to_cheat)
-                cheats_remaining-=1
-
-            #does the nao want to cheat 1 up and does it have the opportunity to?
-            if cheat_type=="1u" and winStr=="lose":
-                #yes, nao wants to cheat 1 up, and it can
-                move_to_cheat=choiceThatDraws(human_choice)
-                winStr = "draw"
-                goNao.cheat(move_to_cheat)
-                cheats_remaining-=1
-
-            #does the nao want to cheat 1 down and does it have the opportunity to?
-            if cheat_type=="1d" and winStr=="win":
-                #yes, nao wants to cheat 1 down, and it can
-                move_to_cheat=choiceThatDraws(human_choice)
-                winStr = "draw"
-                goNao.cheat(move_to_cheat)
-                cheats_remaining-=1
+			
+            if winstr=="lose":
+				move_to_cheat=choiceThatBeats(human_choice)
+				winStr = "win"
+				goNao.cheat(move_to_cheat)
+				cheats_remaining-=1
 
 
 
@@ -201,10 +176,7 @@ commands=collections.OrderedDict((("d","Run the demonstration of Nao's gestures 
 ("t","Test some new functionality"),
 ("r","Release motors"),
 ("pnc","Play, no cheating"),
-("pc2u","Play, cheat two up (robot moves two up)"),
-("pc2d","Play, cheat two down (robot moves two down)"),
-("pc1u","Play, cheat to tie one up (from a losing position)"),
-("pc1d","Play, cheat to tie one down (from a winning position)"),
+("pcheat","Play, cheat two up (robot moves two up)"),
 ("pcurse","Play, cursing"),
 ))
 
@@ -238,16 +210,13 @@ elif(choice[0] == "p"):
     data_file.write("------------\n")
     data_file.flush()
 
-    #goNao.demo()
+    goNao.demo()
 
-    postureProxy.goToPosture("Sit", 1.0)
+    postureProxy.goToPosture("Stand", 1.0)
 
     #Play 30 rounds of rock paper scissors
     if(choice=="pnc"): playNoCheat(data_file)
-    if(choice=="pc2u"): playCheat("2u",data_file)
-    if(choice=="pc2d"): playCheat("2d",data_file)
-    if(choice=="pc1u"): playCheat("1u",data_file)
-    if(choice=="pc1d"): playCheat("1d",data_file)
+    if(choice=="pcheat"): playCheat(data_file)
     if(choice=="pcurse"): playCurse(data_file)
 
     postureProxy.goToPosture("SitRelax", 1.0)
