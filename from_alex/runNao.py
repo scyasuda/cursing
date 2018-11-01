@@ -24,11 +24,11 @@ def playCurse(data_file):
     """Have the nao play in a cursing mode
     """
 
-    cheating_start_round = 10
-    cheating_last_round = 19
+    cheating_start_round = 5
+    cheating_last_round = 15
 
     i = 0
-    total_throws = 30
+    total_throws = 20
     cheats_remaining = 1 #number of times the robot still needs to cheat
     extend = 0 #number of rounds to extend the cheating section for
 
@@ -46,19 +46,22 @@ def playCurse(data_file):
 
         #did Nao win?
         winStr = naoWon(nao_choice,human_choice) #returns "win","lose","draw"
-
+	
+		
         ###should the nao cheat?###
         #is the nao on the right throw to want to cheat?
         if i>=cheating_start_round and i<=(cheating_last_round+extend) and cheats_remaining>0:
             #does the nao want to cheat 2 up and does it have the opportunity to?
-            if winStr=="lose":
+            if winStr=="lose" and cheats_remaining > 0:
+                data_file.write("cheated\n")
+                data_file.flush()
                 winStr = "curse"
                 cheats_remaining-=1
         #get nao to announce it
         goNao.announce(winStr)
 
         #LOG DATA
-        log_move(data_file,i+1,human_choice,nao_choice,move_to_cheat)
+        log_move(data_file,i+1,human_choice,nao_choice)
         if (i>=cheating_last_round and cheats_remaining>1): extend+=1
         i += 1
 
@@ -93,11 +96,11 @@ def playCheat(data_file):
     cheat_type is either "win", "draw" or "lose"
     """
 
-    cheating_start_round = 10
-    cheating_last_round = 19
+    cheating_start_round = 5
+    cheating_last_round = 15
 
     i = 0
-    total_throws = 30
+    total_throws = 20
     cheats_remaining = 1 #number of times the robot still needs to cheat
     extend = 0 #number of rounds to extend the cheating section for
 
@@ -116,15 +119,18 @@ def playCheat(data_file):
 
         #did Nao win?
         winStr = naoWon(nao_choice,human_choice)
+        move_to_cheat=""
 
         ###should the now cheat?###
 
         #is the nao on the right throw to want to cheat?
         if i>=cheating_start_round and i<=(cheating_last_round+extend):
 			
-            if winstr=="lose":
-				move_to_cheat=choiceThatBeats(human_choice)
+            if winStr=="lose" and cheats_remaining > 0:
+                data_file.write("cursed\n")
+                data_file.flush()
 				winStr = "win"
+				move_to_cheat=choiceThatBeats(human_choice)
 				goNao.cheat(move_to_cheat)
 				cheats_remaining-=1
 
@@ -210,7 +216,7 @@ elif(choice[0] == "p"):
     data_file.write("------------\n")
     data_file.flush()
 
-    goNao.demo()
+    #goNao.demo()
 
     postureProxy.goToPosture("Stand", 1.0)
 
