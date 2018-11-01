@@ -129,10 +129,10 @@ def playCheat(data_file):
             if winStr=="lose" and cheats_remaining > 0:
                 data_file.write("cursed\n")
                 data_file.flush()
-				winStr = "win"
-				move_to_cheat=choiceThatBeats(human_choice)
-				goNao.cheat(move_to_cheat)
-				cheats_remaining-=1
+                winStr = "win"
+                move_to_cheat=choiceThatBeats(human_choice)
+                goNao.cheat(move_to_cheat)
+                cheats_remaining-=1
 
 
 
@@ -216,7 +216,7 @@ elif(choice[0] == "p"):
     data_file.write("------------\n")
     data_file.flush()
 
-    #goNao.demo()
+    goNao.demo()
 
     postureProxy.goToPosture("Stand", 1.0)
 

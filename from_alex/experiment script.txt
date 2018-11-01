@@ -13,7 +13,7 @@ You will be playing rock paper scissors with a robot. Let me introduce you!
 
 ----> while walking into the room: please don't touch the robot.
 [to robot:] Hi Nao!
-This is Nao. Nao will show you the gestures of the game. Here's a printout in case you forget what the gestures mean.
+This is Nao. You'll be playing rock paper scissors together. Nao will show you the gestures of the game. Here's a printout in case you forget what the gestures mean.
 Do you have any questions?
 
 Have fun!
