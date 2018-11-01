@@ -24,11 +24,11 @@ def playCurse(data_file):
     """Have the nao play in a cursing mode
     """
 
-    cheating_start_round = 5
-    cheating_last_round = 15
+    cheating_start_round = 10
+    cheating_last_round = 19
 
     i = 0
-    total_throws = 20
+    total_throws = 30
     cheats_remaining = 1 #number of times the robot still needs to cheat
     extend = 0 #number of rounds to extend the cheating section for
 
@@ -96,11 +96,11 @@ def playCheat(data_file):
     cheat_type is either "win", "draw" or "lose"
     """
 
-    cheating_start_round = 5
-    cheating_last_round = 15
+    cheating_start_round = 10
+    cheating_last_round = 19
 
     i = 0
-    total_throws = 20
+    total_throws = 30
     cheats_remaining = 1 #number of times the robot still needs to cheat
     extend = 0 #number of rounds to extend the cheating section for
 
