@@ -58,7 +58,7 @@ def playCurse(data_file):
         goNao.announce(winStr)
 
         #LOG DATA
-        #log_move(data_file,i+1,human_choice,nao_choice,move_to_cheat)
+        log_move(data_file,i+1,human_choice,nao_choice,move_to_cheat)
         if (i>=cheating_last_round and cheats_remaining>1): extend+=1
         i += 1
 
@@ -138,7 +138,7 @@ def playCheat(data_file):
         goNao.announce(winStr)
 
         #LOG DATA
-        #log_move(data_file,i+1,human_choice,nao_choice,move_to_cheat)
+        log_move(data_file,i+1,human_choice,nao_choice,move_to_cheat)
 
         if (i>=cheating_last_round and cheats_remaining>1): extend+=1
 
