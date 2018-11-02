@@ -16,7 +16,7 @@ lose = ["Aw, you win"]
 'You win. Fuck!',
 'God dam it, you win!',
 'Shit, you win!]"""
-curse = ["Fuck, you win!"]
+curse = ["Oh, fuck, you win!"]
 
 """draw = ['It was a draw',
 'Nobody won',
