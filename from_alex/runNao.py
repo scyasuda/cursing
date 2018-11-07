@@ -20,15 +20,15 @@ def log_move(data_file,number,human_choice,robot_choice,cheat_move=""):
     data_file.write("%d,%s,%s,%s\n"%(number,human_choice.replace("\n","").replace("\r",""),robot_choice,cheat_move))
     data_file.flush()
 
-def playCurse(data_file):
+def playCurse(data_file, start_round=10, last_round=19, num_throws=30):
     """Have the nao play in a cursing mode
     """
 
-    cheating_start_round = 10
-    cheating_last_round = 19
+    cheating_start_round = start_round
+    cheating_last_round = last_round
 
     i = 0
-    total_throws = 30
+    total_throws = num_throws
     cheats_remaining = 1 #number of times the robot still needs to cheat
     extend = 0 #number of rounds to extend the cheating section for
 
@@ -46,8 +46,8 @@ def playCurse(data_file):
 
         #did Nao win?
         winStr = naoWon(nao_choice,human_choice) #returns "win","lose","draw"
-	
-		
+
+
         ###should the nao cheat?###
         #is the nao on the right throw to want to cheat?
         if i>=cheating_start_round and i<=(cheating_last_round+extend) and cheats_remaining>0:
@@ -59,6 +59,8 @@ def playCurse(data_file):
                 cheats_remaining-=1
         #get nao to announce it
         goNao.announce(winStr)
+        if(winStr=="curse"): #give time for participant reaction
+            time.sleep(4)
 
         #LOG DATA
         log_move(data_file,i+1,human_choice,nao_choice)
@@ -122,12 +124,13 @@ def playCheat(data_file):
         move_to_cheat=""
 
         ###should the now cheat?###
-
+        cheated = 0
         #is the nao on the right throw to want to cheat?
         if i>=cheating_start_round and i<=(cheating_last_round+extend):
-			
+
             if winStr=="lose" and cheats_remaining > 0:
-                data_file.write("cursed\n")
+                data_file.write("cheated\n")
+                cheated = 1
                 data_file.flush()
                 winStr = "win"
                 move_to_cheat=choiceThatBeats(human_choice)
@@ -142,6 +145,8 @@ def playCheat(data_file):
 
         #get nao to announce it
         goNao.announce(winStr)
+        if(cheated == 1):
+            time.sleep(4) #give time for participant reaction
 
         #LOG DATA
         log_move(data_file,i+1,human_choice,nao_choice,move_to_cheat)
@@ -184,6 +189,7 @@ commands=collections.OrderedDict((("d","Run the demonstration of Nao's gestures 
 ("pnc","Play, no cheating"),
 ("pcheat","Play, cheat two up (robot moves two up)"),
 ("pcurse","Play, cursing"),
+("pshort", "Play, short cursing")
 ))
 
 #Output all the commands
@@ -205,7 +211,8 @@ elif(choice=="r"):
     goNao.releaseNao()
 
 elif(choice=="t"):
-    goNao.announce("curse")
+    #goNao.announce("curse")
+    goNao.saybye()
     goNao.releaseNao()
 
 elif(choice[0] == "p"):
@@ -217,28 +224,30 @@ elif(choice[0] == "p"):
     data_file.flush()
 
     #Introductory Interaction
-    
+
     print "\nPlease choose a conversation prompt:"
     print " \"h\" is for hi"
     print " \"m\" is for meet"
     print " \"r\" is for ready"
     print " \"f\" is for finished"
-    
+
     prompt = ""
     while prompt != "f":
         prompt = raw_input('Conversation Prompt: ').replace("\n","").replace("\r","")
-        if prompt not in ['h','m','r','f']:    
+        if prompt not in ['h','m','r','f']:
             continue
         if prompt == "h":
             goNao.sayhi()
         elif prompt == "m":
             goNao.saymeet()
         elif prompt == "r":
+            goNao.saystanding()
+            postureProxy.goToPosture("Stand", 1.0)
             goNao.sayready()
         elif prompt == "f":
             break
-	
-    goNao.demo()
+
+    #goNao.demo()
 
     postureProxy.goToPosture("Stand", 1.0)
 
@@ -246,8 +255,29 @@ elif(choice[0] == "p"):
     if(choice=="pnc"): playNoCheat(data_file)
     if(choice=="pcheat"): playCheat(data_file)
     if(choice=="pcurse"): playCurse(data_file)
+    if(choice=="pshort"): playCurse(data_file, 0, 3, 3)
 
     postureProxy.goToPosture("SitRelax", 1.0)
+
+    goNao.releaseNao()
+
+    #Exit Interaction
+    print "\nPlease choose a conversation prompt:"
+    print " \"h\" is for hi"
+    print " \"f\" is for finished"
+    print " \"g\" is for goodbye"
+
+    prompt = ""
+    while prompt != "f":
+        prompt = raw_input('Conversation Prompt: ').replace("\n","").replace("\r","")
+        if prompt not in ['h','g','f']:
+            continue
+        if prompt == "h":
+            goNao.sayhi()
+        elif prompt == "g":
+            goNao.saybye()
+        elif prompt == "f":
+            break
 
     goNao.releaseNao()
 
