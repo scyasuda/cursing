@@ -239,12 +239,14 @@ class Gesture:
 
     def sayhi(self):
         headYawHi = -0.7
-        headYaw = 0.0
         self.motion.setAngles("HeadYaw", headYawHi, 0.1)
         time.sleep(1)
         self.genSpeech(self.hi)
         
     def saymeet(self):
+        headYawMeet = 0.0
+        self.motion.setAngles("HeadYaw", headYawMeet, 0.1)
+        time.sleep(1)
         self.genSpeech(self.meet)
         
     def sayready(self):
