@@ -24,10 +24,16 @@ curse = ["Oh, fuck, you win!"]
 'Rematch?']"""
 draw = ["We have tied this round"]
 
-finish = "Thank you for playing with me. That was fun. I'm going to sit down now. Someone will come get you shortly."
+finish = ("That's all we have time for today. Thank you for playing with me."+
+". Someone will come get you shortly, but I'm going to sit down. It's hard for "+
+"robots to stand all the time.")
 
 hi = "Hi."
 
 meet = "It's nice to meet you."
 
+standing = "Okay, I'm going to stand up now."
+
 ready = "I'm ready to play."
+
+bye = "Bye!"
