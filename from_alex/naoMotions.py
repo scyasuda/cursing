@@ -241,7 +241,7 @@ class Gesture:
 
     def sayhi(self):
         self.motion.setStiffnesses("Body", 1.0)
-        headYawHi = -0.7
+        headYawHi = -0.3
         headYaw = 0.0
         self.motion.setAngles("HeadYaw", headYawHi, 0.1)
         time.sleep(1)
@@ -258,7 +258,7 @@ class Gesture:
 
     def saybye(self):
         self.motion.setStiffnesses("Body", 1.0)
-        headYawHi = -0.6
+        headYawHi = -0.3
         headYaw = 0.0
         self.motion.setAngles("HeadYaw", headYawHi, 0.1)
         time.sleep(1)
