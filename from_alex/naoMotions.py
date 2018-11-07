@@ -30,6 +30,9 @@ class Gesture:
         self.lose = anim.lose
         self.draw = anim.draw
         self.curse = anim.curse
+        self.hi = anim.hi
+        self.meet = anim.meet
+        self.ready = anim.ready
         self.connectNao()
     #initialize all nao devices____________________________________________________________
     def connectNao(self):
@@ -233,6 +236,19 @@ class Gesture:
             randnr = random.randint(0,len(self.curse)-1)
             self.genSpeech(self.curse[randnr])
             time.sleep(1)
+
+    def sayhi(self):
+        headYawHi = -0.7
+        headYaw = 0.0
+        self.motion.setAngles("HeadYaw", headYawHi, 0.1)
+        time.sleep(1)
+        self.genSpeech(self.hi)
+        
+    def saymeet(self):
+        self.genSpeech(self.meet)
+        
+    def sayready(self):
+        self.genSpeech(self.ready)
 
     # RELEASE THE JOINTS SO IT WON'T COMPLAIN
     def releaseNao(self):
