@@ -32,7 +32,9 @@ class Gesture:
         self.curse = anim.curse
         self.hi = anim.hi
         self.meet = anim.meet
+        self.standing =anim.standing
         self.ready = anim.ready
+        self.bye =anim.bye
         self.connectNao()
     #initialize all nao devices____________________________________________________________
     def connectNao(self):
@@ -98,7 +100,7 @@ class Gesture:
         self.posture.goToPosture("Stand", 1.0)
         self.led.fadeListRGB("FaceLeds",[0x00FFFFFF],[0.1])
 
-        self.genSpeech("Hello! My name is Nao.")
+        #self.genSpeech("Hello! My name is Nao.")
         #self.send_command("wave.xar")
         self.posture.goToPosture("Stand", 1.0)
 
@@ -238,17 +240,32 @@ class Gesture:
             time.sleep(1)
 
     def sayhi(self):
+        self.motion.setStiffnesses("Body", 1.0)
         headYawHi = -0.7
         headYaw = 0.0
         self.motion.setAngles("HeadYaw", headYawHi, 0.1)
         time.sleep(1)
         self.genSpeech(self.hi)
-        
+
     def saymeet(self):
         self.genSpeech(self.meet)
-        
+
+    def saystanding(self):
+        self.genSpeech(self.standing)
+
     def sayready(self):
         self.genSpeech(self.ready)
+
+    def saybye(self):
+        self.motion.setStiffnesses("Body", 1.0)
+        headYawHi = -0.6
+        headYaw = 0.0
+        self.motion.setAngles("HeadYaw", headYawHi, 0.1)
+        time.sleep(1)
+        self.genSpeech(self.bye)
+        time.sleep(1)
+        self.motion.setAngles("HeadYaw", headYaw, 0.2)
+        #self.motion.setStiffnesses("Body", 0.0)
 
     # RELEASE THE JOINTS SO IT WON'T COMPLAIN
     def releaseNao(self):
