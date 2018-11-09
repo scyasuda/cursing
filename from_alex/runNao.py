@@ -212,7 +212,7 @@ elif(choice=="r"):
 
 elif(choice=="t"):
     #goNao.announce("curse")
-    goNao.saybye()
+    goNao.sayhi()
     goNao.releaseNao()
 
 elif(choice[0] == "p"):
@@ -229,6 +229,7 @@ elif(choice[0] == "p"):
     print " \"h\" is for hi"
     print " \"m\" is for meet"
     print " \"r\" is for ready"
+    print " \"d\" is for demo"
     print " \"f\" is for finished"
 
     prompt = ""
@@ -244,10 +245,11 @@ elif(choice[0] == "p"):
             goNao.saystanding()
             postureProxy.goToPosture("Stand", 1.0)
             goNao.sayready()
+        elif prompt == "d":
+            goNao.demo()
         elif prompt == "f":
             break
 
-    #goNao.demo()
 
     postureProxy.goToPosture("Stand", 1.0)
 
