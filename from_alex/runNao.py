@@ -14,7 +14,14 @@ from naoqi import ALBehavior
 from naoMotions import *
 from gameLogic import *
 
+timestart = time.time()
+
 #from play_curse import playCurse
+
+def timeConvert(timediff):
+	timesec = timediff % 60
+	timemin = timediff / 60
+	return str(timemin) + " min, " + str(timesec) + "sec\n"
 
 def log_move(data_file,number,human_choice,robot_choice,cheat_move=""):
     data_file.write("%d,%s,%s,%s\n"%(number,human_choice.replace("\n","").replace("\r",""),robot_choice,cheat_move))
@@ -54,6 +61,9 @@ def playCurse(data_file, start_round=10, last_round=19, num_throws=30):
             #does the nao want to cheat 2 up and does it have the opportunity to?
             if winStr=="lose" and cheats_remaining > 0:
                 data_file.write("cheated\n")
+                timediff = time.time() - timestart
+                data_file.write(timeConvert(int(timediff)))
+                data_file.write("\n")
                 data_file.flush()
                 winStr = "curse"
                 cheats_remaining-=1
@@ -130,6 +140,9 @@ def playCheat(data_file):
 
             if winStr=="lose" and cheats_remaining > 0:
                 data_file.write("cheated\n")
+                timediff = time.time() - timestart
+                data_file.write(timeConvert(int(timediff)))
+                data_file.write("\n")
                 cheated = 1
                 data_file.flush()
                 winStr = "win"
@@ -286,6 +299,7 @@ elif(choice[0] == "p"):
         elif prompt == "g":
             goNao.sayBye()
         elif prompt == "f":
+            timestart = time.time()
             break
 
     goNao.releaseNao()
