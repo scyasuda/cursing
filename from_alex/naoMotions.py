@@ -239,7 +239,15 @@ class Gesture:
             self.genSpeech(self.curse[randnr])
             time.sleep(1)
 
-    def sayhi(self):
+    def headHi(self):
+        self.motion.setStiffnesses("Body",1.0)
+        headYawHi = -0.7
+        headYaw = 0.0
+        self.motion.setAngles("HeadYaw", headYawHi, 0.1)
+        time.sleep(1)
+        self.motion.setAngles("HeadYaw", headYaw, 0.1)
+
+    def sayHi(self):
         self.motion.setStiffnesses("Body", 1.0)
         headYawHi = -0.3
         headYaw = 0.0
@@ -247,16 +255,16 @@ class Gesture:
         time.sleep(1)
         self.genSpeech(self.hi)
 
-    def saymeet(self):
+    def sayMeet(self):
         self.genSpeech(self.meet)
 
-    def saystanding(self):
+    def sayStanding(self):
         self.genSpeech(self.standing)
 
-    def sayready(self):
+    def sayReady(self):
         self.genSpeech(self.ready)
 
-    def saybye(self):
+    def sayBye(self):
         self.motion.setStiffnesses("Body", 1.0)
         headYawHi = -0.3
         headYaw = 0.0
@@ -270,7 +278,7 @@ class Gesture:
     # RELEASE THE JOINTS SO IT WON'T COMPLAIN
     def releaseNao(self):
         try:
-            self.posture.goToPosture("SitRelax", 1.0)
+            self.posture.goToPosture("Sit", 1.0)
             self.motion.stiffnessInterpolation("Body",0.0,self.stiffness)
         except Exception, e:
             print "Error when sitting down nao and making nao unstiff: "+str(e)
