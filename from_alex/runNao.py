@@ -212,7 +212,7 @@ elif(choice=="r"):
 
 elif(choice=="t"):
     #goNao.announce("curse")
-    goNao.sayhi()
+    goNao.headHi()
     goNao.releaseNao()
 
 elif(choice[0] == "p"):
@@ -238,13 +238,13 @@ elif(choice[0] == "p"):
         if prompt not in ['h','m','r','f']:
             continue
         if prompt == "h":
-            goNao.sayhi()
+            goNao.sayHi()
         elif prompt == "m":
-            goNao.saymeet()
+            goNao.sayMeet()
         elif prompt == "r":
-            goNao.saystanding()
+            goNao.sayStanding()
             postureProxy.goToPosture("Stand", 1.0)
-            goNao.sayready()
+            goNao.sayReady()
         elif prompt == "d":
             goNao.demo()
         elif prompt == "f":
@@ -275,9 +275,9 @@ elif(choice[0] == "p"):
         if prompt not in ['h','g','f']:
             continue
         if prompt == "h":
-            goNao.sayhi()
+            goNao.sayHi()
         elif prompt == "g":
-            goNao.saybye()
+            goNao.sayBye()
         elif prompt == "f":
             break
 
