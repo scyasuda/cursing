@@ -92,7 +92,7 @@ class Gesture:
     def goodbye(self):
         self.genSpeech(anim.finish)
         time.sleep(5)
-        self.posture.goToPosture("SitRelax", 1.0)
+        self.posture.goToPosture("Sit", 1.0)
 
     #____________________________________________________________
 
