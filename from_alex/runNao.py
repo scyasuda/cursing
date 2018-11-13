@@ -204,6 +204,7 @@ if choice not in commands:
 
 #Execute the user's choice
 if(choice == "d"):
+    print("demo")
     postureProxy.goToPosture("Stand", 1.0)
     goNao.demo()
 
@@ -229,13 +230,15 @@ elif(choice[0] == "p"):
     print " \"h\" is for hi"
     print " \"m\" is for meet"
     print " \"r\" is for ready"
+    print " \"g\" is for goodbye"
     print " \"d\" is for demo"
     print " \"f\" is for finished"
 
     prompt = ""
     while prompt != "f":
         prompt = raw_input('Conversation Prompt: ').replace("\n","").replace("\r","")
-        if prompt not in ['h','m','r','f']:
+        if prompt not in ['h','m','r','d','g','f']:
+            print(prompt+" not in list of acceptable commands")
             continue
         if prompt == "h":
             goNao.sayHi()
@@ -246,7 +249,10 @@ elif(choice[0] == "p"):
             postureProxy.goToPosture("Stand", 1.0)
             goNao.sayReady()
         elif prompt == "d":
+            postureProxy.goToPosture("Stand", 1.0)
             goNao.demo()
+        elif prompt == "g":
+            goNao.sayBye()
         elif prompt == "f":
             break
 
@@ -273,6 +279,7 @@ elif(choice[0] == "p"):
     while prompt != "f":
         prompt = raw_input('Conversation Prompt: ').replace("\n","").replace("\r","")
         if prompt not in ['h','g','f']:
+            print(prompt+" not in list of acceptable commands")
             continue
         if prompt == "h":
             goNao.sayHi()
