@@ -259,7 +259,7 @@ elif(choice[0] == "p"):
     if(choice=="pcurse"): playCurse(data_file)
     if(choice=="pshort"): playCurse(data_file, 0, 3, 3)
 
-    postureProxy.goToPosture("SitRelax", 1.0)
+    postureProxy.goToPosture("Sit", 1.0)
 
     goNao.releaseNao()
 
