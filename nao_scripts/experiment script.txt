@@ -1,0 +1,37 @@
+Script:
+
+Meet participant
+Here is the consent form for this experiment. You're consenting to be video-
+recorded, and that you will be playing a game with a robot.
+
+----
+Please fill out this survey before we continue with the experience.
+
+----
+Are you familiar with the game 'rock paper scissors'?
+  If no: explain the game.
+You will be playing rock paper scissors with a robot. Let me introduce you!
+
+----
+#The chair in the room should be far back from the robot to discourage
+#them from touching the robot.
+[Researcher]: Hi Nao!
+[robot turns its head and responds]: Hi!
+[Researcher]:This is Nao. You'll be playing rock paper scissors together.
+[to robot]: Okay Nao, get ready to play!
+[Nao stands up]
+[Nao: Okay, I'm ready to play!
+Nao will show you the gestures of the game.
+Here's a printout in case you forget what the gestures mean.
+Do you have any questions?
+[Researcher]: Goodbye Nao!
+Nao: Goodbye!
+
+Have fun!
+Nao will let you know once this part of the experiment is over.
+
+---->
+Please come out so you can fill out another questionnaire.
+
+----
+Thank you
